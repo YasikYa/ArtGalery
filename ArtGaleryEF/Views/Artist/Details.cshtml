@@ -1,0 +1,65 @@
+﻿@model ArtGaleryEF.Models.ArtistOrdersViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    <hr />
+    <div>
+        <div><h2>Orders</h2></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Picture Title
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        Copy Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Orders.Count() == 0)
+                {
+                    <tr>
+                        <td>This Artist doesn`t have any orders yet</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var order in Model.Orders)
+                    {
+                        <tr>
+                            <td>
+                                @order.Title
+                            </td>
+                            <td>
+                                @order.Date.ToShortDateString()
+                            </td>
+                            <td>
+                                @order.Count
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Home", "Index", "Home")
+</div>

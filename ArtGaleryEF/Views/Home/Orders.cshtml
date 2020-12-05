@@ -1,0 +1,56 @@
+﻿@model ArtGaleryEF.Models.PictureOrdersViewModel
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>Orders on '@Model.Title'</h1>
+
+<p>
+    @Html.ActionLink("Create new Order", "AddOrder", "Home", new { id = Model.PictureId, callbackUrl = Url.Action("Orders", "Home", new { id = Model.PictureId }) })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Artist Name</label>
+            </th>
+            <th>
+                <label>Date</label>
+            </th>
+            <th>
+                <label>Count</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Orders.Count() == 0)
+        {
+            <tr>
+                <td>No orders created for this picture yet</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model.Orders)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.ArtistName, "Details", "Artist", new { id = item.ArtistId })
+                    </td>
+                    <td>
+                        <label>@item.Date.ToShortDateString()</label>
+                    </td>
+                    <td>
+                        <label>@item.Count</label>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<hr />
+<div>
+    @Html.ActionLink("All Pictures", "Index")
+</div>

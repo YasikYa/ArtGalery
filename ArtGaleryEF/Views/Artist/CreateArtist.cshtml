@@ -1,0 +1,35 @@
+﻿@model ArtGaleryEF.Models.CreateArtistViewModel
+
+@{
+    ViewData["Title"] = "CreateArtist";
+}
+
+<h1>CreateArtist</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">First Name</label>
+                @Html.EditorFor(m => m.FirstName)
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Last Name</label>
+                @Html.EditorFor(m => m.LastName)
+            </div>
+            <div class="form-group">
+                <label asp-for="FameStatus" class="control-label">Fame</label>
+                @Html.DropDownListFor(m => m.FameStatus, (IEnumerable<SelectListItem>)ViewBag.StatusFilter)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("All Artists", "Index")
+</div>

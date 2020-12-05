@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ArtGaleryEF.Models.PictureViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div>
+    <h1>Awailable Pictures</h1>
+    <h2>@Html.ActionLink("See all Artists", "Index", "Artist")</h2>
+</div>
+
+<p>
+    @Html.ActionLink("Add new Picture", "CreatePicture", "Home")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.ActionLink("Orders", "Orders", new { id = item.Id }) |
+                @Html.ActionLink("Create Order", "AddOrder", new { id = item.Id, callbackUrl = Url.Action("Index", "Home") })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

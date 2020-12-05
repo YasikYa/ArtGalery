@@ -1,0 +1,38 @@
+﻿@model ArtGaleryEF.Models.CreateOrderViewModel
+
+@{
+    ViewData["Title"] = "AddOrder";
+}
+
+<h1>AddOrder on picture - '@ViewBag.PictureTitle'</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("AddOrderFilter", "Home"))
+        {
+            @Html.Hidden("id", null, new { value = ViewBag.PictureId })
+            @Html.Hidden("callbackUrl", null, new { value = ViewBag.CallbackUrl })
+            @Html.DropDownList("fameFilter", (IEnumerable<SelectListItem>)ViewBag.StatusFilter)
+            <div class="form-group">
+                <input type="submit" value="Apply filter" class="btn btn-primary" />
+            </div>
+        }
+        @using (Html.BeginForm("AddOrder", "Home"))
+        {
+            @Html.Hidden("PictureId", null, new { value = ViewBag.PictureId })
+            @Html.Hidden("callbackUrl", null, new { value = ViewBag.CallbackUrl })
+            <div class="form-group">
+                <label asp-for="Select Artist" class="control-label">Select an Artist</label>
+                @Html.DropDownListFor(m => m.ArtistId, (IEnumerable<SelectListItem>)ViewBag.Artist)
+            </div>
+            <div class="form-group">
+                <label asp-for="Copy count" class="control-label">Copy count</label>
+                @Html.EditorFor(m => m.Count)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
